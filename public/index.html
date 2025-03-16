@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>QuickSort Demo</h1>
+    <input type="text" id="input" placeholder="Enter numbers comma-separated">
+    <button onclick="sort()">Sort</button>
+    <div id="result"></div>
+
+    <script>
+        async function sort() {
+            const input = document.getElementById('input').value;
+            const numbers = input.split(',').map(Number);
+            
+            const response = await fetch('/sort', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ array: numbers })
+            });
+            
+            const result = await response.json();
+            document.getElementById('result').textContent = result.sorted;
+        }
+    </script>
+</body>
+</html>
